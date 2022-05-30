@@ -1,0 +1,65 @@
+<div class="rounded-md border-2 shadow-lg" style="min-width: 400px;">
+  <header class="flex bg-gray-100 rounded-t-md">
+    <p class="text-xl font-bold text-green-500 p-4 bg-green-200 rounded-tl-md">Input</p>
+  </header>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col items-center gap-2 py-4">
+    <div class="flex border rounded w-80 {{ (isPatternControl(age) || isRequiredControl(age)) && 'border-red-500 border-2' }}">
+      <label class="font-semibold rounded-l bg-gray-100 py-2 px-3">Age</label>
+      <input
+        type="text"
+        class="outline-none rounded px-3 w-full"
+        placeholder="Enter your age"
+        formControlName="age"
+      >
+    </div>
+    <span *ngIf="isPatternControl(age)" class="text-sm text-red-500 text-left">The age is invalid.</span>
+    <span *ngIf="isRequiredControl(age)" class="text-sm text-red-500">This field is required.</span>
+    <div class="flex border rounded w-80 {{ isRequiredControl(sex) && 'border-red-500 border-2' }}">
+      <label class="font-semibold rounded-l bg-gray-100 py-2 px-3">Sex</label>
+      <select class="outline-none w-full rounded px-3" formControlName="sex">
+        <option value="" selected>Select one</option>
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+      </select>
+    </div>
+    <span *ngIf="isRequiredControl(sex)" class="text-sm text-red-500">This field is required.</span>
+    <div class="flex border rounded w-80 {{ isRequiredControl(bloodPressure) && 'border-red-500 border-2' }}">
+      <label class="font-semibold rounded-l bg-gray-100 py-2 px-3 w-4/5">Blood Pressure</label>
+      <select class="outline-none w-full rounded px-3" formControlName="bloodPressure">
+        <option value="" selected>Select one</option>
+        <option value="HIGH">High</option>
+        <option value="LOW">Low</option>
+      </select>
+    </div>
+    <span *ngIf="isRequiredControl(bloodPressure)" class="text-sm text-red-500">This field is required.</span>
+    <div class="flex border rounded w-80 {{ isRequiredControl(cholesterol) && 'border-red-500 border-2' }}">
+      <label class="font-semibold text-base rounded-l bg-gray-100 py-2 px-3">Cholesterol</label>
+      <select class="outline-none w-full rounded px-3" formControlName="cholesterol">
+        <option value="" selected>Select one</option>
+        <option value="HIGH">High</option>
+        <option value="NORMAL">Normal</option>
+      </select>
+    </div>
+    <span *ngIf="isRequiredControl(cholesterol)" class="text-sm text-red-500">This field is required.</span>
+    <div class="flex border rounded w-80 {{ (isRequiredControl(level_Na_K) || isPatternControl(level_Na_K)) && 'border-red-500 border-2' }}">
+      <label class="font-semibold rounded-l bg-gray-100 py-2 px-3 w-3/5">Level Na & K</label>
+      <input
+        type="text"
+        class="outline-none rounded px-3 w-full"
+        placeholder="Enter your level of Na and K"
+        formControlName="level_Na_K"
+      >
+    </div>
+    <span *ngIf="isRequiredControl(level_Na_K)" class="text-sm text-red-500">This field is required.</span>
+    <span *ngIf="isPatternControl(level_Na_K)" class="text-sm text-red-500 text-left">The level of Na & K is invalid.</span>
+    <div class="flex w-full justify-end px-9">
+      <button
+        type="submit"
+        class="hover:bg-green-500 hover:text-white font-semibold py-2 px-4 rounded-md border-2 border-green-500 transition"
+        [disabled]="!form.valid"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
